@@ -44,6 +44,15 @@
           <v-list-item-title>Cereri</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
+
+      <v-list-item to="/docs">
+        <v-list-item-icon>
+          <v-icon>mdi-file-document-outline</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>Documente</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
     </v-list>
   </div>
 </template>

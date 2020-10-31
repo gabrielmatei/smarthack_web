@@ -5,6 +5,7 @@ import Home from '../views/Home.vue'
 import Requests from '../views/Requests.vue'
 import Institutions from '../views/Institutions.vue'
 import Clerks from '../views/Clerks.vue'
+import Docs from '../views/Docs.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/clerks',
     name: 'Clerks',
     component: Clerks
+  },
+  {
+    path: '/docs',
+    name: 'Docs',
+    component: Docs
   }
 ]
 

@@ -10,13 +10,10 @@ class InstitutionService {
     }
 
     if (protect) {
-      // headers.Authorization = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE2MDQyMDYzNjgsImlhdCI6MTYwNDE3MDM2OH0.nZPdPVor6TMOdVRG145eDp53nXqQokGhYnD_Kh527vs'
       headers.Authorization = localStorage.getItem('token')
     }
 
-    return {
-      headers
-    }
+    return { headers }
   }
 
   async getAll () {
