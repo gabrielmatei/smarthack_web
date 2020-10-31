@@ -1,10 +1,17 @@
 <template>
   <div>
-    <h1>Institutions</h1>
-    <v-container fluid>
+    <Loader v-if="loading"/>
+    <v-container fluid v-else>
+      <h1>Institutions</h1>
+
+      <v-text-field
+        label="Cauta"
+        v-model="search"
+      />
+
       <v-row dense>
         <v-col
-          v-for="institution in institutions"
+          v-for="institution in searchFilter"
           :key="institution.id"
           :cols="4"
         >
@@ -22,31 +29,52 @@
 </template>
 
 <script>
+import Loader from '@/components/Loader'
 import Institution from '@/components/Institution'
 import AddInstitution from '@/components/AddInstitution'
+import InstitutionService from '@/services/institution'
 
 export default {
   name: 'Institutions',
   components: {
+    Loader,
     Institution,
     AddInstitution
   },
   data: () => ({
+    loading: false,
     addDialog: false,
-    institutions: [
-      { id: '1', initial: 'I1', name: 'Institutie 1', address: 'Str. Strada, Nr. 10, Sector 1, Bucuresti' },
-      { id: '2', initial: 'I2', name: 'Institutie 2', address: 'Str. Strada, Nr. 10, Sector 1, Bucuresti' },
-      { id: '3', initial: 'I3', name: 'Institutie 3', address: 'Str. Strada, Nr. 10, Sector 1, Bucuresti' },
-      { id: '4', initial: 'I4', name: 'Institutie 4', address: 'Str. Strada, Nr. 10, Sector 1, Bucuresti' },
-      { id: '5', initial: 'I5', name: 'Institutie 5', address: 'Str. Strada, Nr. 10, Sector 1, Bucuresti' }
-    ]
+    search: '',
+    institutions: []
   }),
+  mounted () {
+    this.loading = true
+    InstitutionService.getAll().then(
+      res => {
+        console.log('res', res)
+        this.loading = false
+        this.institutions = res.data
+      },
+      error => {
+        console.error('err', error)
+        this.loading = false
+      }
+    )
+  },
   methods: {
     add () {
       this.addDialog = true
     },
     closeAddDialog () {
       this.addDialog = false
+    }
+  },
+  computed: {
+    searchFilter () {
+      if (this.search) {
+        return this.institutions.filter(i => i.name.toLowerCase().includes(this.search))
+      }
+      return this.institutions
     }
   }
 }

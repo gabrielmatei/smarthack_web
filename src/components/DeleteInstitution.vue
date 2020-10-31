@@ -1,7 +1,8 @@
 <template>
   <v-row justify="center">
     <v-dialog v-model="dialog" persistent max-width="600px">
-      <v-card>
+      <Loader v-if="loading"/>
+      <v-card v-else>
         <v-card-title>
           <span class="headline">Stergere {{model.name}}</span>
         </v-card-title>
@@ -24,7 +25,7 @@
           <v-btn color="blue darken-1" text @click="$emit('close')">
             Inchide
           </v-btn>
-          <v-btn color="primary" @click="$emit('close')">
+          <v-btn color="primary" @click="remove">
             Sterge
           </v-btn>
         </v-card-actions>
@@ -34,14 +35,43 @@
 </template>
 
 <script>
+import Loader from '@/components/Loader'
+import InstitutionService from '@/services/institution'
+
 export default {
   name: 'DeleteInstitution',
+  components: {
+    Loader
+  },
   props: {
     dialog: Boolean,
     model: Object
   },
   data: () => ({
+    loading: false,
     name: ''
-  })
+  }),
+  methods: {
+    remove () {
+      if (this.name !== this.model.name) {
+        return
+      }
+
+      this.loading = true
+      InstitutionService.delete(this.model.id).then(
+        res => {
+          console.log('res', res)
+          this.loading = false
+          if (res.status === 200) {
+            this.$emit('close')
+          }
+        },
+        error => {
+          console.error('err', error)
+          this.loading = false
+        }
+      )
+    }
+  }
 }
 </script>
