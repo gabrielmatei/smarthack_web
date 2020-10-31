@@ -34,6 +34,7 @@ export default {
   methods: {
     logout () {
       this.drawer = !this.drawer
+      localStorage.setItem('token', '')
       this.$router.push({ path: '/login' })
     }
   },
