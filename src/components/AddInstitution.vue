@@ -11,6 +11,13 @@
             <v-row>
               <v-col cols="12">
                 <v-text-field
+                  label="abreviere"
+                  v-model="abreviation"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-text-field
                   label="nume"
                   v-model="name"
                   required
@@ -54,6 +61,7 @@ export default {
   },
   data: () => ({
     loading: false,
+    abreviation: '',
     name: '',
     address: ''
   }),
@@ -61,6 +69,7 @@ export default {
     save () {
       this.loading = true
       const payload = {
+        abreviation: this.abreviation,
         name: this.name,
         address: this.address
       }

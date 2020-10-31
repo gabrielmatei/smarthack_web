@@ -72,7 +72,9 @@ export default {
   computed: {
     searchFilter () {
       if (this.search) {
-        return this.institutions.filter(i => i.name.toLowerCase().includes(this.search))
+        return this.institutions.filter(i =>
+          i.name.toLowerCase().includes(this.search) ||
+          i.abreviation.toLowerCase().includes(this.search))
       }
       return this.institutions
     }

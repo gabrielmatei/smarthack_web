@@ -49,6 +49,21 @@ class InstitutionService {
       })
   }
 
+  async edit (id, payload) {
+    return axios
+      .put(`${url}/institutions/${id}`, payload, this.getHeader(true))
+      .then(res => ({
+        status: res.status,
+        data: res.data
+      }))
+      .catch(error => {
+        console.error('InstitutionService:', error)
+        return {
+          status: error.response ? error.response.status : 500
+        }
+      })
+  }
+
   async delete (id) {
     return axios
       .delete(`${url}/institutions/${id}`, this.getHeader(true))
