@@ -1,5 +1,11 @@
 <template>
   <div>
+    <v-btn
+      color="primary"
+      @click="startRequests"
+    >
+      Incepe verificarea
+    </v-btn>
     <v-data-table
       :headers="headers"
       :items="requests"
@@ -65,6 +71,11 @@ export default {
   computed: {
   },
   methods: {
+    startRequests () {
+      this.dialog = true
+      this.currentIndex = 0
+      this.currentRequest = this.requests[this.currentIndex]
+    },
     openRequest (index, request) {
       this.dialog = true
       this.currentRequest = request
