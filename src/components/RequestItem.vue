@@ -8,7 +8,7 @@
         color="primary"
         @click="options.openRequest(index, request)"
       >
-        Open
+        Vezi cerere
       </v-btn>
     </td>
   </tr>

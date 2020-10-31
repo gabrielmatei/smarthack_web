@@ -1,12 +1,6 @@
 <template>
   <div>
     <h1>Requests</h1>
-    <v-btn
-      color="primary"
-      @click="startRequests"
-    >
-      Incepe verificarea
-    </v-btn>
     <v-data-table
       :headers="headers"
       :items="requests"
@@ -31,6 +25,11 @@
         </tbody>
       </template>
     </v-data-table>
+
+    <v-btn color="primary" @click="startRequests">
+      Incepe verificarea
+    </v-btn>
+
     <Request
       :show="dialog"
       :request="currentRequest"
@@ -58,7 +57,7 @@ export default {
         { text: '#', value: 'id' },
         { text: 'Nume si prenume', value: 'name' },
         { text: 'Status', value: 'status' },
-        { text: 'Action', value: 'action' }
+        { text: '', value: 'action' }
       ],
       requests: [
         { id: '1', name: 'John Doe', status: 'pending' },
