@@ -18,12 +18,30 @@
     <v-divider></v-divider>
 
     <v-list>
-      <v-list-item>
+      <v-list-item to="/institutions">
         <v-list-item-icon>
-          <v-icon>mdi-view-dashboard</v-icon>
+          <v-icon>mdi-domain</v-icon>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title>Vizualizare cereri</v-list-item-title>
+          <v-list-item-title>Institutii</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-list-item to="/clerks">
+        <v-list-item-icon>
+          <v-icon>mdi-account-multiple</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>Functionari</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-list-item to="/requests">
+        <v-list-item-icon>
+          <v-icon>mdi-file</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>Cereri</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
