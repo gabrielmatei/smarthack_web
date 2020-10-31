@@ -1,10 +1,11 @@
 <template>
   <div>
     <h1>Requests</h1>
+
     <v-data-table
       :headers="headers"
       :items="requests"
-      item-key="name"
+      item-key="id"
       class="elevation-1"
       :search="search"
       :options="{ openRequest }"
@@ -67,8 +68,6 @@ export default {
       currentIndex: 0,
       currentRequest: undefined
     }
-  },
-  computed: {
   },
   methods: {
     startRequests () {

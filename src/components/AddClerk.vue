@@ -3,7 +3,7 @@
     <v-dialog v-model="dialog" persistent max-width="600px">
       <v-card>
         <v-card-title>
-          <span class="headline">Editare {{model.name}}</span>
+          <span class="headline">Adaugare functionar</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -11,14 +11,14 @@
               <v-col cols="12">
                 <v-text-field
                   label="nume"
-                  v-model="model.name"
+                  v-model="name"
                   required
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  label="adresa"
-                  v-model="model.address"
+                  label="institutie"
+                  v-model="institution"
                   required
                 ></v-text-field>
               </v-col>
@@ -41,10 +41,13 @@
 
 <script>
 export default {
-  name: 'EditInstitution',
+  name: 'AddClerk',
   props: {
-    dialog: Boolean,
-    model: Object
-  }
+    dialog: Boolean
+  },
+  data: () => ({
+    name: '',
+    institution: ''
+  })
 }
 </script>

@@ -3,7 +3,7 @@
     <v-dialog v-model="dialog" persistent max-width="600px">
       <v-card>
         <v-card-title>
-          <span class="headline">Editare {{model.name}}</span>
+          <span class="headline">{{model.name}}</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -17,8 +17,8 @@
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  label="adresa"
-                  v-model="model.address"
+                  label="institutia"
+                  v-model="model.institution"
                   required
                 ></v-text-field>
               </v-col>
@@ -41,7 +41,7 @@
 
 <script>
 export default {
-  name: 'EditInstitution',
+  name: 'EditClerk',
   props: {
     dialog: Boolean,
     model: Object
