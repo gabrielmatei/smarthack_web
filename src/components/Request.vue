@@ -10,7 +10,7 @@
           <v-btn icon dark @click="close">
             <v-icon>mdi-close</v-icon>
           </v-btn>
-          <v-toolbar-title>{{request.name}}</v-toolbar-title>
+          <v-toolbar-title>{{request.requestedDocumentTemplate.name}} -  {{request.requester.lastName}} {{request.requester.firstName}}</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn dark text @click="prev">
@@ -27,7 +27,43 @@
         <v-container fluid>
           <v-row>
             <v-col>
-              Documente
+              Status: {{request.requestStatus}}
+            </v-col>
+          </v-row>
+          <v-row v-if="generatedPdfFromFieldsMap">
+            <h3>Document generat</h3>
+            <v-col offset="4" cols="4">
+              <pdf
+              style="border: 1px solid black"
+              v-for="i in pdf.pageCount" :key="`pdf-page-${i}`"
+              :src="pdf.src"
+              :page="i"
+              class="pdf-page"
+            />
+            </v-col>
+          </v-row>
+           <v-row v-else>
+            <v-col>
+              <h3>Campuri completate</h3>
+              <v-row v-for="field in Object.keys(fields)" :key="field">
+                <v-col cols="2">
+                  {{field}}
+                </v-col>
+                <v-col cols="3">
+                  <v-text-field
+                    v-model="fields[field]"
+                    label="Solo"
+                    solo
+                    disabled
+                  />
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <h3>Documente necesare</h3>
+              {{request.requiredDocuments}}
             </v-col>
           </v-row>
           <v-row>
@@ -49,11 +85,34 @@
 </template>
 
 <script>
+import pdf from 'vue-pdf'
+
 export default {
   name: 'Request',
+  components: {
+    pdf
+  },
   props: {
     show: Boolean,
     request: Object
+  },
+  data: () => ({
+    pdf: {
+      pageCount: undefined,
+      src: undefined
+    }
+  }),
+  watch: {
+    'request.generatedPdfFromFieldsMap': function () {
+      if (!this.request.generatedPdfFromFieldsMap) {
+        return
+      }
+      this.pdf.src = pdf.createLoadingTask('data:application/pdf;base64,' + this.request.generatedPdfFromFieldsMap)
+      this.pdf.src.promise.then(pdf => {
+        this.loaderMessage = ''
+        this.pdf.pageCount = pdf.numPages
+      })
+    }
   },
   methods: {
     close () {
@@ -70,6 +129,11 @@ export default {
     },
     reject () {
 
+    }
+  },
+  computed: {
+    fields () {
+      return this.request.completedFieldsMap
     }
   }
 }

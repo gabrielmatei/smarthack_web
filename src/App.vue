@@ -11,7 +11,7 @@
 
     <v-app-bar app v-if="showNavigation" color="primary">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>{{user.institution}}</v-toolbar-title>
+      <!-- <v-toolbar-title>{{user.institution.name}}</v-toolbar-title> -->
     </v-app-bar>
 
     <v-main class="ma-4">

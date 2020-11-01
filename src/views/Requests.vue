@@ -66,6 +66,8 @@ export default {
       headers: [
         { text: '#', value: 'id' },
         { text: 'Nume si prenume', value: 'name' },
+        { text: 'Document', value: 'doc' },
+        { text: 'Institutie', value: 'institution' },
         { text: 'Status', value: 'status' },
         { text: '', value: 'action' }
       ],

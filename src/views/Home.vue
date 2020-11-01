@@ -8,11 +8,9 @@
 export default {
   name: 'Home',
   mounted () {
-    if (this.user.role === 'admin') {
+    if (this.user.role === 'ROLE_SUPERVISOR') {
       this.$router.push('/institutions')
-    } else if (this.user.role === 'supervisor') {
-      this.$router.push('/clerks')
-    } else if (this.user.role === 'clerk') {
+    } else if (this.user.role === 'ROLE_INSTITUTION_ADMIN') {
       this.$router.push('/requests')
     }
   },

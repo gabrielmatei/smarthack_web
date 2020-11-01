@@ -1,8 +1,10 @@
 <template>
   <tr>
     <td>{{request.id}}</td>
-    <td>{{request.name}}</td>
-    <td>{{request.status}}</td>
+    <td>{{request.requester.lastName}} {{request.requester.firstName}}</td>
+    <td>{{request.requestedDocumentTemplate.name}}</td>
+    <td>{{request.institution.abreviation}}</td>
+    <td>{{request.requestStatus}}</td>
     <td>
       <v-btn
         color="primary"
