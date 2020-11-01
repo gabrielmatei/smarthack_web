@@ -18,7 +18,7 @@
     <v-divider></v-divider>
 
     <v-list>
-      <v-list-item to="/institutions">
+      <v-list-item to="/institutions" v-if="user.role === 'admin'">
         <v-list-item-icon>
           <v-icon>mdi-domain</v-icon>
         </v-list-item-icon>
@@ -27,7 +27,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item to="/clerks">
+      <v-list-item to="/clerks" v-if="user.role === 'admin' || user.role === 'supervisor'">
         <v-list-item-icon>
           <v-icon>mdi-account-multiple</v-icon>
         </v-list-item-icon>
@@ -36,7 +36,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item to="/requests">
+      <v-list-item to="/requests" v-if="user.role === 'clerk'">
         <v-list-item-icon>
           <v-icon>mdi-file</v-icon>
         </v-list-item-icon>
@@ -45,7 +45,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item to="/docs">
+      <v-list-item to="/docs" v-if="user.role === 'supervisor' || user.role === 'clerk'">
         <v-list-item-icon>
           <v-icon>mdi-file-document-outline</v-icon>
         </v-list-item-icon>
@@ -62,7 +62,8 @@ export default {
   name: 'Navigation',
   computed: {
     user () {
-      return JSON.parse(localStorage.getItem('user'))
+      const user = JSON.parse(localStorage.getItem('user'))
+      return user
     }
   }
 }
