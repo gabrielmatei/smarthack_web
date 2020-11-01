@@ -2,11 +2,14 @@
   <div>
     <Loader v-if="loading"/>
     <v-container fluid v-else>
-      <h1>Institutions</h1>
+      <h1>Institutii</h1>
+
+      <br/>
 
       <v-text-field
-        label="Cauta"
+        label="Cauta institutie"
         v-model="search"
+        solo
       />
 
       <v-row dense>

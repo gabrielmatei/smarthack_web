@@ -3,7 +3,7 @@
     <Loader v-if="loading"/>
     <v-container fluid v-else>
       <h1>Utilizatori</h1>
-
+      <br/>
       <v-data-table
         :headers="headers"
         :items="users"
@@ -13,6 +13,7 @@
       >
         <template v-slot:top>
           <v-text-field
+            solo
             v-model="search"
             label="Search"
           ></v-text-field>

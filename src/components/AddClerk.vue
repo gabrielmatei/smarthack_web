@@ -6,31 +6,25 @@
           <span class="headline">Adaugare functionar</span>
         </v-card-title>
         <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col cols="12">
-                <v-text-field
-                  label="nume"
-                  v-model="name"
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
-                  label="institutie"
-                  v-model="institution"
-                  required
-                ></v-text-field>
-              </v-col>
-            </v-row>
-          </v-container>
+          <v-text-field
+            label="nume"
+            v-model="name"
+            solo
+            required
+          ></v-text-field>
+          <v-text-field
+            label="institutie"
+            v-model="institution"
+            solo
+            required
+          ></v-text-field>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="$emit('close')">
+          <v-btn color="blue darken-1" text @click="$emit('close')" tile large>
             Close
           </v-btn>
-          <v-btn color="primary" @click="$emit('close')">
+          <v-btn color="primary" @click="$emit('close')" tile large>
             Save
           </v-btn>
         </v-card-actions>

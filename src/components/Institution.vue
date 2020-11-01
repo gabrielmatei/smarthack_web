@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-avatar tile color="brown" size="56" height="200px" style="width: 100%">
+    <v-avatar tile color="brown" size="56" height="130px" style="width: 100%">
       <span class="white--text headline">{{model.abreviation}}</span>
     </v-avatar>
 

@@ -4,41 +4,34 @@
       <Loader v-if="loading"/>
       <v-card v-else>
         <v-card-title>
-          <span class="headline">Editare {{model.name}}</span>
+          <span class="headline">Editare: {{model.name}}</span>
         </v-card-title>
         <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col cols="12">
-                <v-text-field
-                  label="abreviation"
-                  v-model="model.abreviation"
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
-                  label="nume"
-                  v-model="model.name"
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
-                  label="adresa"
-                  v-model="model.address"
-                  required
-                ></v-text-field>
-              </v-col>
-            </v-row>
-          </v-container>
+          <v-text-field
+            label="abreviation"
+            v-model="model.abreviation"
+            solo
+            required
+          ></v-text-field>
+          <v-text-field
+            label="nume"
+            v-model="model.name"
+            solo
+            required
+          ></v-text-field>
+          <v-text-field
+            label="adresa"
+            v-model="model.address"
+            solo
+            required
+          ></v-text-field>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="$emit('close')">
+          <v-btn color="blue darken-1" tile large text @click="$emit('close')">
             Close
           </v-btn>
-          <v-btn color="primary" @click="save">
+          <v-btn color="primary" tile large @click="save">
             Save
           </v-btn>
         </v-card-actions>

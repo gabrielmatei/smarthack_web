@@ -2,7 +2,7 @@
   <tr>
     <td>{{clerk.id}}</td>
     <td>
-      <v-avatar color="brown">
+      <v-avatar color="brown" size="36">
         <span class="white--text headline">{{clerk.avatar}}</span>
       </v-avatar>
     </td>
@@ -10,11 +10,11 @@
     <td>{{clerk.institution}}</td>
     <td>{{clerk.role}}</td>
     <td>
-      <v-btn color="primary" @click="edit">
+      <v-btn color="primary" @click="edit" tile small style="margin-right: 10px">
         <v-icon left>mdi-pencil</v-icon>
         Editeaza
       </v-btn>
-      <v-btn color="error" @click="remove">
+      <v-btn color="error" @click="remove" tile small>
         <v-icon left>mdi-delete</v-icon>
         Sterge
       </v-btn>

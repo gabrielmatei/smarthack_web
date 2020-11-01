@@ -10,10 +10,10 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="$emit('close')">
+          <v-btn color="blue darken-1" text @click="$emit('close')" tile large>
             Inchide
           </v-btn>
-          <v-btn color="error" @click="$emit('close')">
+          <v-btn color="error" @click="$emit('close')" tile large>
             Sterge
           </v-btn>
         </v-card-actions>

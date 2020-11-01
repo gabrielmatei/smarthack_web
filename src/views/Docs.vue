@@ -3,9 +3,10 @@
     <Loader v-if="loading"/>
     <v-container fluid v-else>
       <h1>Sabloane documente</h1>
-
+      <br/>
       <v-text-field
-        label="Cauta"
+        label="Cauta un sablon"
+        solo
         v-model="search"
       />
 

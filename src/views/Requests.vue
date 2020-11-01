@@ -1,59 +1,67 @@
 <template>
   <div>
-    <h1>Requests</h1>
+    <Loader v-if="loading"/>
+    <v-container fluid v-else>
+      <h1>Cereri documente</h1>
+      <br/>
+      <v-data-table
+        :headers="headers"
+        :items="requests"
+        item-key="id"
+        class="elevation-1"
+        :search="search"
+        :options="{ openRequest }"
+      >
+        <template v-slot:top>
+          <v-text-field
+            v-model="search"
+            solo
+            label="Cauto o cerere"
+          ></v-text-field>
+        </template>
+        <template v-slot:body="{ items, options }">
+          <tbody>
+            <RequestItem
+              v-for="item in items" :key="item.id"
+              :request="item"
+              :options="options"
+            />
+          </tbody>
+        </template>
+      </v-data-table>
 
-    <v-data-table
-      :headers="headers"
-      :items="requests"
-      item-key="id"
-      class="elevation-1"
-      :search="search"
-      :options="{ openRequest }"
-    >
-      <template v-slot:top>
-        <v-text-field
-          v-model="search"
-          label="Search"
-        ></v-text-field>
-      </template>
-      <template v-slot:body="{ items, options }">
-        <tbody>
-          <RequestItem
-            v-for="item in items" :key="item.id"
-            :request="item"
-            :options="options"
-          />
-        </tbody>
-      </template>
-    </v-data-table>
+      <v-btn color="primary" x-large @click="startRequests" class="floating-button">
+        <v-icon>mdi-file-search-outline</v-icon>
+        Vezi toate cererile
+      </v-btn>
 
-    <v-btn color="primary" x-large @click="startRequests" class="floating-button">
-      <v-icon>mdi-file-search-outline</v-icon>
-      Vezi toate cererile
-    </v-btn>
-
-    <Request
-      :show="dialog"
-      :request="currentRequest"
-      @close="dialog = false"
-      @prev="prevRequest"
-      @next="nextRequest"
-    />
+      <Request
+        :show="dialog"
+        :request="currentRequest"
+        @close="dialog = false"
+        @prev="prevRequest"
+        @next="nextRequest"
+      />
+    </v-container>
   </div>
 </template>
 
 <script>
+import Loader from '@/components/Loader'
 import Request from '@/components/Request'
 import RequestItem from '@/components/RequestItem'
+import RequestService from '@/services/request'
 
 export default {
   name: 'RequestList',
   components: {
+    Loader,
     Request,
     RequestItem
   },
   data () {
     return {
+      loading: false,
       search: '',
       headers: [
         { text: '#', value: 'id' },
@@ -61,14 +69,25 @@ export default {
         { text: 'Status', value: 'status' },
         { text: '', value: 'action' }
       ],
-      requests: [
-        { id: '1', name: 'John Doe', status: 'pending' },
-        { id: '2', name: 'John Smith', status: 'pending' }
-      ],
+      requests: [],
       dialog: false,
       currentIndex: 0,
       currentRequest: undefined
     }
+  },
+  mounted () {
+    this.loading = true
+    RequestService.getAll().then(
+      res => {
+        console.log('res', res)
+        this.loading = false
+        this.requests = res.data
+      },
+      error => {
+        console.error('err', error)
+        this.loading = false
+      }
+    )
   },
   methods: {
     startRequests () {

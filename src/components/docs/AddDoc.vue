@@ -4,7 +4,7 @@
       <Loader v-if="loading"/>
       <v-card v-else>
         <v-card-title>
-          <span class="headline">Adaugare Document</span>
+          <span class="headline">Adaugare sablon document</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -13,13 +13,13 @@
                 <v-text-field
                   label="nume"
                   v-model="name"
+                  solo
                   required
                 />
               </v-col>
               <v-col cols="12">
                 <input type="file" ref="file" id="customFile"
                                v-on:change="handleFileUpload($event)"
-                               class="custom-file-input"
                                enctype="multipart/form-data">
               </v-col>
             </v-row>
@@ -27,10 +27,10 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="$emit('close')">
+          <v-btn color="blue darken-1" text @click="$emit('close')" tile large>
             Close
           </v-btn>
-          <v-btn color="primary" @click="save">
+          <v-btn color="primary" @click="save" tile large>
             Save
           </v-btn>
         </v-card-actions>
@@ -68,7 +68,7 @@ export default {
     save () {
       const formData = new FormData()
       formData.append('name', this.name)
-      formData.append('institutionId', 1)
+      // formData.append('institutionId', 1)
       formData.append('file', this.singleFile)
 
       this.loading = true

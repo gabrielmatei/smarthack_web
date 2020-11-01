@@ -5,21 +5,24 @@
       <v-row align="center">
         <v-col offset="4" cols="4">
           <v-alert v-if="error" type="error">{{error}}</v-alert>
-          <h1>Login</h1>
+          <h1>Autentificare</h1>
+          <br/>
           <v-form>
             <v-text-field
               v-model="username"
-              label="username"
+              solo
+              label="Cod numeric personal"
               required
             ></v-text-field>
             <v-text-field
               v-model="password"
-              label="password"
+              solo
+              label="parola"
               type="password"
               required
             ></v-text-field>
-            <v-btn @click="login" color="primary" width="100%">
-              Log in
+            <v-btn @click="login" color="primary" width="100%" tile large>
+              Autentificare
             </v-btn>
           </v-form>
         </v-col>
