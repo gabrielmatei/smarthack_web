@@ -30,6 +30,21 @@ class RequestService {
         }
       })
   }
+
+  async response (payload) {
+    return axios
+      .post(`${url}/responses`, payload, this.getHeader(true))
+      .then(res => ({
+        status: res.status,
+        data: res.data
+      }))
+      .catch(error => {
+        console.error('RequestService:', error)
+        return {
+          status: error.response ? error.response.status : 500
+        }
+      })
+  }
 }
 
 export default new RequestService()

@@ -5,6 +5,7 @@
       hide-overlay
       transition="dialog-bottom-transition"
     >
+      <Loader v-if="loading"/>
       <v-card v-if="request">
         <v-toolbar dark color="primary">
           <v-btn icon dark @click="close">
@@ -60,12 +61,12 @@
               </v-row>
             </v-col>
           </v-row>
-          <v-row>
+          <!-- <v-row>
             <v-col>
               <h3>Documente necesare</h3>
               {{request.requiredDocuments}}
             </v-col>
-          </v-row>
+          </v-row> -->
           <v-row>
             <v-col>
               <v-btn color="success" width="100%" height="70" @click="accept">
@@ -86,17 +87,21 @@
 
 <script>
 import pdf from 'vue-pdf'
+import Loader from '@/components/Loader'
+import RequestService from '@/services/request'
 
 export default {
   name: 'Request',
   components: {
-    pdf
+    pdf,
+    Loader
   },
   props: {
     show: Boolean,
     request: Object
   },
   data: () => ({
+    loading: false,
     pdf: {
       pageCount: undefined,
       src: undefined
@@ -125,10 +130,34 @@ export default {
       this.$emit('next')
     },
     accept () {
-
+      this.confirmRequest(true)
     },
     reject () {
-
+      this.confirmRequest(false)
+    },
+    confirmRequest (confirm) {
+      this.loading = true
+      const statuses = {}
+      if (!confirm) {
+        statuses[`${Object.keys(this.fields)[0]}`] = 'test'
+      }
+      const payload = {
+        requestId: this.request.id,
+        statuses
+      }
+      RequestService.response(payload).then(
+        res => {
+          console.log('res', res)
+          this.loading = false
+          if (res.status === 200) {
+            this.$emit('close')
+          }
+        },
+        error => {
+          console.error('err', error)
+          this.loading = false
+        }
+      )
     }
   },
   computed: {
