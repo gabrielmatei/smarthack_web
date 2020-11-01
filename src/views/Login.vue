@@ -1,9 +1,9 @@
 <template>
   <div class="login">
     <Loader v-if="loading"/>
-    <v-container v-else>
-      <v-row>
-        <v-col offset="3" cols="6">
+    <v-container v-else align="center">
+      <v-row align="center">
+        <v-col offset="4" cols="4">
           <v-alert v-if="error" type="error">{{error}}</v-alert>
           <h1>Login</h1>
           <v-form>
@@ -55,6 +55,7 @@ export default {
           console.log('res', res)
           this.loading = false
           if (res.status === 200) {
+            localStorage.setItem('user', JSON.stringify(res.data.user))
             localStorage.setItem('token', res.data.jwt)
             this.$router.push({ path: '/' })
           } else {

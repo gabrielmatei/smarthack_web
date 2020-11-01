@@ -9,8 +9,8 @@
 
       <v-list-item link>
         <v-list-item-content>
-          <v-list-item-title class="title">Popescu Ion</v-list-item-title>
-          <v-list-item-subtitle>popescu.ion@ro-docs.com</v-list-item-subtitle>
+          <v-list-item-title class="title">{{user.lastName}} {{user.firstName}}</v-list-item-title>
+          <v-list-item-subtitle>{{user.email}}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -32,7 +32,7 @@
           <v-icon>mdi-account-multiple</v-icon>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title>Functionari</v-list-item-title>
+          <v-list-item-title>Utilizatori</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
@@ -50,7 +50,7 @@
           <v-icon>mdi-file-document-outline</v-icon>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title>Documente</v-list-item-title>
+          <v-list-item-title>Sabloane documente</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -59,6 +59,11 @@
 
 <script>
 export default {
-  name: 'Navigation'
+  name: 'Navigation',
+  computed: {
+    user () {
+      return JSON.parse(localStorage.getItem('user'))
+    }
+  }
 }
 </script>

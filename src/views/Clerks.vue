@@ -1,49 +1,56 @@
 <template>
   <div>
-    <h1>Clerks</h1>
+    <Loader v-if="loading"/>
+    <v-container fluid v-else>
+      <h1>Utilizatori</h1>
 
-    <v-data-table
-      :headers="headers"
-      :items="clerks"
-      item-key="id"
-      class="elevation-1"
-      :search="search"
-    >
-      <template v-slot:top>
-        <v-text-field
-          v-model="search"
-          label="Search"
-        ></v-text-field>
-      </template>
-      <template v-slot:body="{ items }">
-        <tbody>
-          <Clerk
-            v-for="item in items" :key="item.id"
-            :clerk="item"
-          />
-        </tbody>
-      </template>
-    </v-data-table>
+      <v-data-table
+        :headers="headers"
+        :items="users"
+        item-key="id"
+        class="elevation-1"
+        :search="search"
+      >
+        <template v-slot:top>
+          <v-text-field
+            v-model="search"
+            label="Search"
+          ></v-text-field>
+        </template>
+        <template v-slot:body="{ items }">
+          <tbody>
+            <Clerk
+              v-for="item in items" :key="item.id"
+              :clerk="item"
+            />
+          </tbody>
+        </template>
+      </v-data-table>
 
-    <v-btn color="primary" fab large dark @click="add">
-      <v-icon>mdi-plus</v-icon>
-    </v-btn>
+      <v-btn color="primary" fab large dark @click="add" class="floating-button">
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
 
-    <AddClerk :dialog="addDialog" @close="closeAddDialog"/>
+      <AddClerk :dialog="addDialog" @close="closeAddDialog"/>
+    </v-container>
   </div>
 </template>
 
 <script>
+import Loader from '@/components/Loader'
 import Clerk from '@/components/Clerk'
 import AddClerk from '@/components/AddClerk'
+import UserService from '@/services/user'
 
 export default {
   name: 'Clerks',
   components: {
+    Loader,
     Clerk,
     AddClerk
   },
   data: () => ({
+    loading: false,
     addDialog: false,
     search: '',
     headers: [
@@ -54,11 +61,22 @@ export default {
       { text: 'Rol', value: 'role' },
       { text: '', value: 'action' }
     ],
-    clerks: [
-      { id: '1', avatar: 'PI', name: 'Popescu Ion', institution: 'ANAF', role: 'admin' },
-      { id: '2', avatar: 'RI', name: 'Radu Ionescu', institution: 'ONRC', role: 'admin' }
-    ]
+    users: []
   }),
+  mounted () {
+    this.loading = true
+    UserService.getAll().then(
+      res => {
+        console.log('res', res)
+        this.loading = false
+        this.users = res.data
+      },
+      error => {
+        console.error('err', error)
+        this.loading = false
+      }
+    )
+  },
   methods: {
     add () {
       this.addDialog = true

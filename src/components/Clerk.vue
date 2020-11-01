@@ -6,7 +6,7 @@
         <span class="white--text headline">{{clerk.avatar}}</span>
       </v-avatar>
     </td>
-    <td>{{clerk.name}}</td>
+    <td>{{clerk.lastName}} {{clerk.firstName}}</td>
     <td>{{clerk.institution}}</td>
     <td>{{clerk.role}}</td>
     <td>

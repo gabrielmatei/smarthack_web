@@ -11,24 +11,16 @@
             <v-row>
               <v-col cols="12">
                 <v-text-field
-                  label="abreviere"
-                  v-model="abreviation"
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
                   label="nume"
                   v-model="name"
                   required
-                ></v-text-field>
+                />
               </v-col>
               <v-col cols="12">
-                <v-text-field
-                  label="adresa"
-                  v-model="address"
-                  required
-                ></v-text-field>
+                <input type="file" ref="file" id="customFile"
+                               v-on:change="handleFileUpload($event)"
+                               class="custom-file-input"
+                               enctype="multipart/form-data">
               </v-col>
             </v-row>
           </v-container>
@@ -63,17 +55,24 @@ export default {
     loading: false,
     abreviation: '',
     name: '',
-    address: ''
+    message: 'Hello Vue!',
+    singleFile: '',
+    refFile: '',
+    chosenFile: 'Chose file'
   }),
   methods: {
+    handleFileUpload (event) {
+      this.singleFile = event.target.files[0]
+      this.chosenFile = this.singleFile.name
+    },
     save () {
+      const formData = new FormData()
+      formData.append('name', this.name)
+      formData.append('institutionId', 1)
+      formData.append('file', this.singleFile)
+
       this.loading = true
-      const payload = {
-        abreviation: this.abreviation,
-        name: this.name,
-        address: this.address
-      }
-      DocService.create(payload).then(
+      DocService.create(formData).then(
         res => {
           console.log('res', res)
           this.loading = false

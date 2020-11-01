@@ -30,8 +30,11 @@ class DocsService {
   }
 
   async create (payload) {
+    const headers = this.getHeader(true)
+    headers['Content-Type'] = 'multipart/form-data'
+    console.log(headers)
     return axios
-      .post(`${url}/documentTemplates`, payload, this.getHeader(true))
+      .post(`${url}/documentTemplates`, payload, headers)
       .then(res => ({
         status: res.status,
         data: res.data

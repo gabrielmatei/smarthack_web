@@ -19,7 +19,7 @@
         </v-col>
       </v-row>
 
-      <v-btn color="primary" fab large dark @click="add">
+      <v-btn color="primary" fab large dark @click="add" class="floating-button">
         <v-icon>mdi-plus</v-icon>
       </v-btn>
 

@@ -5,7 +5,7 @@ const url = 'https://smarthack-backend.herokuapp.com'
 class AuthService {
   async login (payload) {
     return axios
-      .post(`${url}/authenticate`, payload)
+      .post(`${url}/users/authenticate`, payload)
       .then(res => ({
         status: res.status,
         data: res.data

@@ -27,8 +27,9 @@
       </template>
     </v-data-table>
 
-    <v-btn color="primary" @click="startRequests">
-      Incepe verificarea
+    <v-btn color="primary" x-large @click="startRequests" class="floating-button">
+      <v-icon>mdi-file-search-outline</v-icon>
+      Vezi toate cererile
     </v-btn>
 
     <Request

@@ -11,7 +11,7 @@
 
     <v-app-bar app v-if="showNavigation">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Docs</v-toolbar-title>
+      <v-toolbar-title>{{user.institution}}</v-toolbar-title>
     </v-app-bar>
 
     <v-main class="ma-4">
@@ -41,7 +41,18 @@ export default {
   computed: {
     showNavigation () {
       return !['/login'].includes(this.$route.path)
+    },
+    user () {
+      return JSON.parse(localStorage.getItem('user'))
     }
   }
 }
 </script>
+
+<style>
+  .floating-button {
+    position: absolute !important;
+    right: 20px !important;
+    bottom: 20px !important;
+  }
+</style>
