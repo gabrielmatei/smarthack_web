@@ -3,11 +3,11 @@
     <td>{{clerk.id}}</td>
     <td>
       <v-avatar color="brown" size="36">
-        <span class="white--text headline">{{clerk.avatar}}</span>
+        <span class="white--text headline">A</span>
       </v-avatar>
     </td>
     <td>{{clerk.lastName}} {{clerk.firstName}}</td>
-    <td>{{clerk.institution}}</td>
+    <td>{{clerk.institution ? clerk.institution.name : '-'}}</td>
     <td>{{clerk.role}}</td>
     <td>
       <v-btn color="primary" @click="edit" tile small style="margin-right: 10px">
